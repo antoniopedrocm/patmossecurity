@@ -83,10 +83,15 @@
             text-decoration: none;
         }
         
-        .logo::before {
-            content: '🛡️';
-            margin-right: 0.5rem;
-            font-size: 1.8rem;
+        .logo img {
+            height: 40px;
+            width: auto;
+            margin-right: 0.75rem;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
         }
         
         .nav-links {
@@ -694,7 +699,10 @@
     <header>
         <div class="container">
             <nav>
-                <a href="#" class="logo">Patmos Security</a>
+                <a href="#" class="logo">
+                    <img src="logo.svg" alt="Patmos Security Logo">
+                    <span class="logo-text">Patmos Security</span>
+                </a>
                 <ul class="nav-links">
                     <li><a href="#home">Início</a></li>
                     <li><a href="#services">Serviços</a></li>
