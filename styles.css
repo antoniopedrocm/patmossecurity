@@ -1,0 +1,292 @@
+/* ------------------------- */
+/* --- VARIAVEIS E RESET --- */
+/* ------------------------- */
+
+:root {
+    --dark-navy: #0a192f;        /* Fundo principal */
+    --navy: #112240;             /* Fundo dos cards */
+    --light-navy: #172a45;       /* Fundo dos cards em hover */
+    --slate: #8892b0;            /* Cor do texto principal/parágrafos */
+    --light-slate: #a8b2d1;      /* Cor do texto secundário/links */
+    --lightest-slate: #ccd6f6;   /* Cor dos títulos */
+    --accent-color: #64ffda;     /* Cor de destaque (ciano/verde) */
+    --accent-hover: rgba(100, 255, 218, 0.1);
+
+    --font-sans: 'Inter', sans-serif;
+    --border-radius: 4px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--dark-navy);
+    color: var(--slate);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+main {
+    padding: 0 25px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* ------------------ */
+/* --- COMPONENTES --- */
+/* ------------------ */
+
+.section {
+    padding: 100px 0;
+}
+
+.section h2 {
+    font-size: clamp(26px, 5vw, 32px); /* Tamanho de fonte responsivo */
+    color: var(--lightest-slate);
+    margin-bottom: 40px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.cta-button {
+    color: var(--accent-color);
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    border-radius: var(--border-radius);
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.cta-button:hover {
+    background-color: var(--accent-hover);
+    cursor: pointer;
+}
+
+
+/* ----------------- */
+/* --- NAVEGAÇÃO --- */
+/* ----------------- */
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: rgba(10, 25, 47, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    transition: top 0.3s;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.navbar nav ul {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+}
+
+.navbar nav ul li a {
+    color: var(--light-slate);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar nav ul li a:hover {
+    color: var(--accent-color);
+}
+
+
+/* --------------- */
+/* ---   HERO  --- */
+/* --------------- */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero .container {
+    padding-bottom: 10vh; /* Empurra o conteúdo um pouco pra cima */
+}
+
+.hero-content h1 {
+    font-size: clamp(40px, 8vw, 70px);
+    color: var(--lightest-slate);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero-content .subtitle {
+    font-size: 20px;
+    color: var(--slate);
+    max-width: 600px;
+    margin-bottom: 40px;
+}
+
+.hero-button {
+    font-size: 1rem;
+    padding: 1.25rem 2.5rem;
+    color: var(--accent-color);
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.hero-button:hover {
+    background-color: var(--accent-hover);
+}
+
+
+/* ---------------- */
+/* --- SERVIÇOS --- */
+/* ---------------- */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: var(--navy);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+    transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.card:hover {
+    transform: translateY(-7px);
+    background-color: var(--light-navy);
+}
+
+.card i {
+    color: var(--accent-color);
+    width: 48px;
+    height: 48px;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    color: var(--lightest-slate);
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 16px;
+    color: var(--slate);
+}
+
+
+/* --------------- */
+/* ---   SOBRE --- */
+/* --------------- */
+
+.about p {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 18px;
+    color: var(--light-slate);
+}
+
+.about p strong {
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+
+/* ---------------- */
+/* ---  CONTATO --- */
+/* ---------------- */
+
+.contact {
+    text-align: center;
+}
+
+.contact h2 {
+    font-size: clamp(30px, 5vw, 50px);
+}
+
+.contact p {
+    color: var(--light-slate);
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+/* ------------ */
+/* --- FOOTER --- */
+/* ------------ */
+
+footer {
+    padding: 2rem;
+    text-align: center;
+    font-size: 13px;
+    color: var(--slate);
+}
+
+/* --------------------- */
+/* --- RESPONSIVIDADE --- */
+/* --------------------- */
+
+@media (max-width: 768px) {
+    main {
+        padding: 0;
+    }
+
+    .navbar .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .navbar nav {
+        display: none; /* Em um projeto real, aqui entraria um menu hamburguer */
+    }
+
+    .hero {
+        text-align: center;
+    }
+
+    .hero-content .subtitle {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
