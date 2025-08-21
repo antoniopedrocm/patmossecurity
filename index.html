@@ -7,699 +7,23 @@
     <meta name="keywords" content="cibersegurança, pentest, segurança da informação, vulnerabilidades, consultoria">
     <title>Patmos Security - Cibersegurança de Classe Mundial</title>
     
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzBGMTcyQSIvPgo8cGF0aCBkPSJNMTYgOEwxMiAxMkgxNkg2TDE2IDIyVjhWOFoiIGZpbGw9IiMzQjgyRjYiLz4KPC9zdmc+">
     
-    <!-- Open Graph -->
     <meta property="og:title" content="Patmos Security - Cibersegurança de Classe Mundial">
     <meta property="og:description" content="Especialistas em pentest, correção de vulnerabilidades e consultoria em segurança da informação.">
     <meta property="og:type" content="website">
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- CSS -->
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --primary-dark: #0F172A;
-            --primary-blue: #3B82F6;
-            --secondary-blue: #1E40AF;
-            --accent-green: #10B981;
-            --accent-red: #EF4444;
-            --text-white: #FFFFFF;
-            --text-gray-light: #F8FAFC;
-            --text-gray-medium: #64748B;
-            --text-gray-dark: #334155;
-            --gradient-bg: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
-            --gradient-accent: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%);
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.6;
-            color: var(--text-gray-dark);
-            overflow-x: hidden;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-white);
-            text-decoration: none;
-        }
-        
-        .logo img {
-            height: 40px;
-            width: auto;
-            margin-right: 0.75rem;
-        }
-        
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        .nav-links a {
-            color: var(--text-white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary-blue);
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: var(--primary-blue);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        .cta-header {
-            background: var(--gradient-accent);
-            color: var(--text-white);
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .cta-header:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
-        }
-        
-        /* Mobile Menu */
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-        
-        .mobile-menu span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-white);
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: var(--gradient-bg);
-            color: var(--text-white);
-            padding: 150px 0 100px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(59,130,246,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero-badge {
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            color: var(--primary-blue);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: inline-block;
-            margin-bottom: 2rem;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #ffffff 0%, #94A3B8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.1;
-        }
-        
-        .hero p {
-            font-size: 1.25rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-        
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn-primary {
-            background: var(--gradient-accent);
-            color: var(--text-white);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-white);
-            padding: 1rem 2rem;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--primary-blue);
-        }
-        
-        /* Services Section */
-        .services {
-            padding: 100px 0;
-            background: var(--text-gray-light);
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-        
-        .section-badge {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--primary-blue);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-        
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--primary-dark);
-        }
-        
-        .section-header p {
-            font-size: 1.2rem;
-            color: var(--text-gray-medium);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .service-card {
-            background: var(--text-white);
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(59, 130, 246, 0.1);
-        }
-        
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-accent);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .service-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--primary-dark);
-        }
-        
-        .service-card p {
-            color: var(--text-gray-medium);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-        
-        .service-features {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-        
-        .service-features li {
-            padding: 0.5rem 0;
-            color: var(--text-gray-dark);
-            position: relative;
-            padding-left: 1.5rem;
-        }
-        
-        .service-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--accent-green);
-            font-weight: 600;
-        }
-        
-        .service-cta {
-            color: var(--primary-blue);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: gap 0.3s ease;
-        }
-        
-        .service-cta:hover {
-            gap: 1rem;
-        }
-        
-        /* Stats Section */
-        .stats {
-            padding: 80px 0;
-            background: var(--primary-dark);
-            color: var(--text-white);
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-        
-        .stat-item h3 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--primary-blue);
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-item p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
-        /* Why Choose Section */
-        .why-choose {
-            padding: 100px 0;
-            background: var(--text-white);
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .feature-item {
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
-        }
-        
-        .feature-item h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--primary-dark);
-        }
-        
-        .feature-item p {
-            color: var(--text-gray-medium);
-            line-height: 1.6;
-        }
-        
-        /* Team Section */
-        .team {
-            padding: 100px 0;
-            background: var(--text-gray-light);
-        }
-        
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-        
-        .team-card {
-            background: var(--text-white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-        
-        .team-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .team-image {
-            height: 300px;
-            background: var(--gradient-accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: var(--text-white);
-        }
-        
-        .team-info {
-            padding: 2rem;
-        }
-        
-        .team-info h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--primary-dark);
-        }
-        
-        .team-role {
-            color: var(--primary-blue);
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-        
-        .team-info p {
-            color: var(--text-gray-medium);
-            line-height: 1.6;
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            padding: 100px 0;
-            background: var(--gradient-bg);
-            color: var(--text-white);
-            text-align: center;
-        }
-        
-        .cta-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .cta-section h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-        
-        .cta-section p {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--primary-dark);
-            color: var(--text-white);
-            padding: 50px 0 20px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-section h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--primary-blue);
-        }
-        
-        .footer-section p,
-        .footer-section a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            line-height: 1.8;
-        }
-        
-        .footer-section a:hover {
-            color: var(--primary-blue);
-        }
-        
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.6);
-        }
-        
-        /* Contact Form */
-        .contact-form {
-            background: var(--text-white);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin-top: 2rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text-gray-dark);
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-blue);
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .mobile-menu {
-                display: flex;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-cta {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .section-header h2 {
-                font-size: 2rem;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-            
-            .hero {
-                padding: 120px 0 80px;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .service-card,
-            .team-card {
-                margin: 0 10px;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease-out;
-        }
-        
-        /* Scroll Behavior */
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        /* Loading States */
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
-        }
-        
-        /* Success States */
-        .success-message {
-            background: var(--accent-green);
-            color: var(--text-white);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container">
             <nav>
-                <a href="#" class="logo">
+                <a href="#home" class="logo">
                     <img src="logo.png" alt="Patmos Security Logo">
                     <span class="logo-text">Patmos Security</span>
                 </a>
@@ -707,10 +31,9 @@
                     <li><a href="#home">Início</a></li>
                     <li><a href="#services">Serviços</a></li>
                     <li><a href="#about">Sobre</a></li>
-                    <li><a href="#team">Equipe</a></li>
                     <li><a href="#contact">Contato</a></li>
                 </ul>
-                <a href="mailto:francisco.gomes@patmossecurity.com.br" class="cta-header">Avaliação Gratuita</a>
+                <a href="mailto:francisco.gomes@patmossecurity.com.br" class="cta-header">Solicitar Análise</a>
                 <div class="mobile-menu">
                     <span></span>
                     <span></span>
@@ -720,204 +43,111 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
+        <div class="hero-background"></div>
         <div class="container">
-            <div class="hero-content fade-in-up">
-                <div class="hero-badge">🔐 Cibersegurança de Classe Mundial</div>
-                <h1>Protegemos seu futuro digital com soluções especializadas</h1>
-                <p>A Patmos Security oferece pentests, correção de vulnerabilidades e consultoria estratégica para empresas que levam segurança a sério. Nossa expertise protege o que mais importa para o seu negócio.</p>
-                <div class="hero-cta">
-                    <a href="mailto:francisco.gomes@patmossecurity.com.br" class="btn-primary">
-                        🚀 Solicitar Avaliação Gratuita
-                    </a>
-                    <a href="#services" class="btn-secondary">Conhecer Serviços</a>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">🔐 Cibersegurança de Classe Mundial</div>
+                    <h1>Protegendo o Futuro do seu Ecossistema Digital</h1>
+                    <p>Identificamos e neutralizamos ameaças antes que elas se tornem um problema. Pentest, análise de vulnerabilidades e consultoria estratégica para fortalecer suas defesas.</p>
+                    <div class="hero-cta">
+                        <a href="mailto:francisco.gomes@patmossecurity.com.br" class="btn-primary">
+                            Agendar Avaliação
+                        </a>
+                        <a href="#services" class="btn-secondary">Nossos Serviços</a>
+                    </div>
+                </div>
+                 <div class="hero-visual">
+                    <img src="hero.jpg" alt="Visual de Cibersegurança" />
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>100+</h3>
-                    <p>Empresas Protegidas</p>
-                </div>
-                <div class="stat-item">
-                    <h3>500+</h3>
-                    <p>Vulnerabilidades Corrigidas</p>
-                </div>
-                <div class="stat-item">
-                    <h3>99.9%</h3>
-                    <p>Taxa de Sucesso</p>
-                </div>
-                <div class="stat-item">
-                    <h3>24h</h3>
-                    <p>Tempo de Resposta</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
             <div class="section-header">
-                <div class="section-badge">🛡️ Nossos Serviços</div>
-                <h2>Soluções completas em cibersegurança</h2>
-                <p>Oferecemos um portfólio abrangente de serviços especializados para proteger sua organização contra todas as ameaças digitais.</p>
+                <div class="section-badge">Nossas Soluções</div>
+                <h2>Um Arsenal Completo Para Sua Segurança</h2>
+                <p>Oferecemos um portfólio de serviços para blindar sua organização contra as ameaças digitais mais sofisticadas.</p>
             </div>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">🎯</div>
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
                     <h3>Pentest Especializado</h3>
-                    <p>Testes de penetração abrangentes que identificam vulnerabilidades antes dos atacantes descobrirem.</p>
-                    <ul class="service-features">
-                        <li>Análise de aplicações web e mobile</li>
-                        <li>Testes de infraestrutura</li>
-                        <li>Engenharia social controlada</li>
-                        <li>Relatórios executivos detalhados</li>
-                    </ul>
+                    <p>Simulamos ataques do mundo real para identificar e explorar vulnerabilidades em suas aplicações e infraestrutura antes que criminosos o façam.</p>
                     <a href="#contact" class="service-cta">Solicitar orçamento →</a>
                 </div>
                 
                 <div class="service-card">
-                    <div class="service-icon">🔧</div>
-                    <h3>Correção de Vulnerabilidades</h3>
-                    <p>Não apenas identificamos problemas - os resolvemos com soluções práticas e eficazes.</p>
-                    <ul class="service-features">
-                        <li>Correção técnica especializada</li>
-                        <li>Implementação de controles</li>
-                        <li>Validação pós-correção</li>
-                        <li>Documentação completa</li>
-                    </ul>
+                    <div class="service-icon">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13.54v-3.54a4 4 0 1 0-8 0v3.54c0 .88-.34 1.72-.93 2.34l-1.62 1.62a2 2 0 1 1-2.82-2.82l1.62-1.62a4 4 0 0 0-5.66-5.66l-1.41 1.41a2 2 0 1 1-2.83-2.83l1.41-1.41a4 4 0 0 0 5.66 5.66l.3.3"></path><path d="m15 12-2 2"></path><path d="m17 10-2 2"></path></svg>
+                    </div>
+                    <h3>Análise de Vulnerabilidades</h3>
+                    <p>Realizamos uma varredura profunda em seus sistemas para encontrar falhas de segurança, configurando a base para uma defesa proativa e eficaz.</p>
                     <a href="#contact" class="service-cta">Saber mais →</a>
                 </div>
-                
+
                 <div class="service-card">
-                    <div class="service-icon">🎧</div>
-                    <h3>Suporte Técnico 24/7</h3>
-                    <p>Suporte especializado quando você mais precisa, com profissionais certificados disponíveis.</p>
-                    <ul class="service-features">
-                        <li>Resposta em até 2 horas</li>
-                        <li>Especialistas certificados</li>
-                        <li>Suporte remoto e presencial</li>
-                        <li>SLA garantido</li>
-                    </ul>
-                    <a href="#contact" class="service-cta">Contratar suporte →</a>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">📊</div>
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20z"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"></path><path d="M12 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path></svg>
+                    </div>
                     <h3>Consultoria Estratégica</h3>
-                    <p>Assessoria especializada para desenvolver e implementar sua estratégia de cibersegurança.</p>
-                    <ul class="service-features">
-                        <li>Análise de riscos corporativos</li>
-                        <li>Compliance e frameworks</li>
-                        <li>Políticas de segurança</li>
-                        <li>Treinamento de equipes</li>
-                    </ul>
+                    <p>Alinhamos sua estratégia de negócio com as melhores práticas de cibersegurança, garantindo conformidade com LGPD, ISO 27001 e outros frameworks.</p>
                     <a href="#contact" class="service-cta">Agendar consulta →</a>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">💻</div>
-                    <h3>Desenvolvimento Seguro</h3>
-                    <p>Criamos aplicações com segurança nativa, seguindo as melhores práticas do mercado.</p>
-                    <ul class="service-features">
-                        <li>Desenvolvimento security by design</li>
-                        <li>Code review especializado</li>
-                        <li>Testes automatizados</li>
-                        <li>DevSecOps implementation</li>
-                    </ul>
-                    <a href="#contact" class="service-cta">Iniciar projeto →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Why Choose Section -->
     <section id="about" class="why-choose">
         <div class="container">
             <div class="section-header">
-                <div class="section-badge">⭐ Por que Patmos</div>
-                <h2>Especialistas que fazem a diferença</h2>
-                <p>Nossa abordagem combina expertise técnica profunda com relacionamento próximo ao cliente, garantindo soluções que realmente funcionam.</p>
+                <div class="section-badge">Nossa Missão</div>
+                <h2>O Significado de Patmos Security</h2>
+                <p>Nosso nome reflete nossa abordagem: vigilância, clareza e a capacidade de revelar o que está oculto para proteger o que é mais valioso.</p>
             </div>
             
-            <!-- Patmos Story Section -->
-            <div style="max-width: 800px; margin: 0 auto 4rem; padding: 2.5rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(15, 23, 42, 0.05) 100%); border-radius: 20px; border: 1px solid rgba(59, 130, 246, 0.1);">
-                <div style="text-align: center; margin-bottom: 2rem;">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">🏛️</div>
-                    <h3 style="font-size: 1.8rem; font-weight: 600; color: var(--primary-dark); margin-bottom: 1rem;">O Significado do Nome Patmos</h3>
-                </div>
-                
-                <div style="text-align: left; line-height: 1.8; color: var(--text-gray-dark);">
-                    <p style="margin-bottom: 1.5rem;">
-                        O nome <strong>Patmos</strong> carrega significado, propósito e visão. Ele vem da <strong>Ilha de Patmos</strong>, na Grécia, conhecida por ser o lugar onde o apóstolo João escreveu o livro do <strong>Apocalipse</strong>, após receber revelações enquanto estava exilado. Um local de isolamento e vigilância que, paradoxalmente, se tornou símbolo de <strong>visão clara, proteção e revelação do invisível</strong>.
+            <div class="patmos-story-card">
+                <div class="patmos-story-content">
+                    <p>
+                        O nome <strong>Patmos</strong> vem da ilha grega onde o apóstolo João, em exílio, teve revelações que escreveu no livro do Apocalipse. Um lugar de isolamento e vigilância que se tornou símbolo de <strong>visão clara e proteção contra o invisível</strong>.
                     </p>
-                    
-                    <p style="margin-bottom: 1.5rem;">
-                        Inspirados por essa simbologia, escolhemos <strong>Patmos</strong> para representar a essência da nossa empresa:
+                    <p>
+                        Essa é a nossa essência: usar nossa visão técnica para revelar vulnerabilidades ocultas e fortalecer suas defesas.
                     </p>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
-                        <div style="text-align: center; padding: 1rem;">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔒</div>
-                            <strong style="color: var(--primary-blue);">Vigilância constante</strong><br>
-                            <span style="font-size: 0.9rem;">contra ameaças cibernéticas</span>
-                        </div>
-                        <div style="text-align: center; padding: 1rem;">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧠</div>
-                            <strong style="color: var(--primary-blue);">Clareza estratégica</strong><br>
-                            <span style="font-size: 0.9rem;">para antecipar riscos</span>
-                        </div>
-                        <div style="text-align: center; padding: 1rem;">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚔️</div>
-                            <strong style="color: var(--primary-blue);">Combate ao invisível</strong><br>
-                            <span style="font-size: 0.9rem;">revelando vulnerabilidades</span>
-                        </div>
-                    </div>
-                    
-                    <p style="margin-bottom: 1.5rem;">
-                        Assim como João teve acesso ao que estava oculto, nosso trabalho é identificar o que não pode ser visto a olho nu no seu ambiente digital — vulnerabilidades, riscos, falhas — e ajudá-lo a fortalecer sua estrutura com soluções eficazes e seguras.
-                    </p>
-                    
-                    <div style="text-align: center; padding: 2rem; background: rgba(59, 130, 246, 0.05); border-radius: 15px; border-left: 4px solid var(--primary-blue);">
-                        <p style="font-size: 1.1rem; font-weight: 500; color: var(--primary-dark); margin: 0;">
-                            <strong>Patmos Security</strong> é mais do que um nome. É uma missão.<br>
-                            É sobre <em>enxergar antes</em>. É sobre <em>proteger sempre</em>.
-                        </p>
-                    </div>
                 </div>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-item">
-                    <div class="feature-icon">🏆</div>
-                    <h3>Experiência Comprovada</h3>
-                    <p>Anos de experiência protegendo organizações de todos os portes contra as mais diversas ameaças digitais.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Metodologia Proprietária</h3>
-                    <p>Desenvolvemos processos únicos e testados que garantem resultados consistentes e mensuráveis.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">🤝</div>
-                    <h3>Relacionamento Duradouro</h3>
-                    <p>Construímos parcerias baseadas em confiança, transparência e resultados comprovados.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Resposta Rápida</h3>
-                    <p>Suporte ágil quando você mais precisa, com tempo de resposta garantido por SLA.</p>
+                <div class="patmos-story-quote">
+                    <p><strong>Patmos Security</strong> é mais que um nome. É uma missão.<br>
+                    É sobre <em>enxergar antes</em> e <em>proteger sempre</em>.</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Pronto para Elevar sua Segurança?</h2>
+                <p>Nossa equipe de especialistas está pronta para analisar seu ambiente e propor um plano de ação robusto. Agende uma conversa sem compromisso.</p>
+                <a href="mailto:francisco.gomes@patmossecurity.com.br" class="btn-primary">Entrar em Contato</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                 <a href="#home" class="logo">
+                    <img src="logo.png" alt="Patmos Security Logo">
+                </a>
+                <p>Patmos Security © 2024 - Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
