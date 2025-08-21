@@ -66,7 +66,7 @@ nav {
 }
 
 .logo img {
-    height: 25px; /* Alterado de 36px para 30px */
+    height: 50px; /* Alterado de 36px para 30px */
     width: auto;
     margin-right: 0.75rem;
 }
@@ -462,4 +462,56 @@ footer {
         margin: 3px 0;
         transition: 0.3s;
     }
+}
+/* --- ESTILOS DO NOVO LOGO TIPOGRÁFICO --- */
+
+/* Importa a fonte Orbitron para uso */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800&display=swap');
+
+/* Contêiner principal do novo logo */
+.logo-typographic {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem; /* Espaçamento entre o "O" e o texto */
+    text-decoration: none;
+}
+
+/* Estilo para o caractere "O" isolado */
+.logo-icon-char {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800; /* Equivalente a font-extrabold */
+    font-size: 3.5rem; /* Tamanho do ícone */
+    color: #22d3ee; /* Cor ciano (cyan-400) */
+    line-height: 1;
+}
+
+/* Contêiner para o nome e subtítulo */
+.logo-text-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo para "PATMOS" */
+.logo-main-text {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem; /* Tamanho do texto principal */
+    color: #ffffff; /* Cor branca */
+    letter-spacing: 0.05em; /* Equivalente a tracking-wider */
+    line-height: 1;
+}
+
+/* Estilo para o "O" destacado em PATMOS */
+.logo-highlight-char {
+    color: #22d3ee; /* Cor ciano */
+}
+
+/* Estilo para "Cyber Security" */
+.logo-subtext {
+    font-family: 'Inter', sans-serif; /* Usando a fonte que você já tem no site */
+    font-size: 0.6rem;
+    color: #cbd5e1; /* Cor cinza (gray-300) */
+    text-transform: uppercase;
+    letter-spacing: 0.2em; /* Espaçamento bem largo */
+    margin-top: 2px;
 }
