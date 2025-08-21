@@ -517,3 +517,22 @@ footer {
     letter-spacing: 0.2em; /* Espaçamento bem largo */
     margin-top: 2px;
 }
+
+/* --- SEÇÃO DE ESTATÍSTICAS DE VULNERABILIDADES --- */
+.vulnerability-stats {
+    padding: 100px 0;
+    background-color: var(--bg-dark); /* Fundo igual ao do hero */
+    border-top: 1px solid var(--border-color);
+}
+
+.chart-container {
+    position: relative;
+    height: 400px; /* Altura do gráfico */
+    width: 100%;
+    max-width: 900px; /* Largura máxima */
+    margin: 0 auto; /* Centraliza o container */
+    background: var(--bg-medium);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+}
