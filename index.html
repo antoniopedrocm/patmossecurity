@@ -189,7 +189,8 @@
             // --- ALTERAÇÃO PRINCIPAL ---
             // A URL agora aponta para o seu proxy na Vercel.
             // Se o seu domínio na Vercel for diferente, atualize a linha abaixo.
-            const proxyUrl = `https://patmos-nvd-proxy.vercel.app/api/nvd?pubStartDate=${isoStartDate}&pubEndDate=${isoEndDate}`;
+            //const proxyUrl = `https://patmos-nvd-proxy.vercel.app/api/nvd?pubStartDate=${isoStartDate}&pubEndDate=${isoEndDate}`;
+			const proxyUrl = `/api/nvd?pubStartDate=${isoStartDate}&pubEndDate=${isoEndDate}`;
             
             let monthlyCounts = {};
             let totalFetched = 0;
