@@ -131,8 +131,7 @@
         </div>
     </section>
 	
-		<!-- Seção de Estatísticas de Vulnerabilidades -->
-	<section id="vulnerability-stats" class="vulnerability-stats">
+		<section id="vulnerability-stats" class="vulnerability-stats">
 		<div class="container">
 			<div class="section-header">
 				<div class="section-badge">Dados Globais</div>
@@ -170,26 +169,27 @@
 		</div>
 	</footer>
 	
-	<!-- Inclusão da biblioteca de gráficos Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const ctx = document.getElementById('cveChart');
         if (!ctx) return;
 
-        // Função para buscar e processar os dados da NVD
+        // Função para buscar e processar os dados da NVD através do nosso proxy
         async function fetchVulnerabilityData() {
-            const apiKey = '270af204-0759-4e10-a841-2b624ed4d8f8'; // Chave de API pública de exemplo
             const now = new Date();
             const startDate = new Date();
             startDate.setDate(now.getDate() - 180); // Últimos 180 dias
 
-            // Formata as datas para o padrão da API
-            const isoStartDate = startDate.toISOString().replace(/\.\d+/, '');
-            const isoEndDate = now.toISOString().replace(/\.\d+/, '');
+            // Formata as datas para o padrão ISO, que o proxy vai repassar para a API da NVD
+            const isoStartDate = startDate.toISOString();
+            const isoEndDate = now.toISOString();
 
-            const apiUrl = `https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=${isoStartDate}&pubEndDate=${isoEndDate}`;
+            // --- ALTERAÇÃO PRINCIPAL ---
+            // A URL agora aponta para o seu proxy na Vercel.
+            // Se o seu domínio na Vercel for diferente, atualize a linha abaixo.
+            const proxyUrl = `https://patmos-nvd-proxy.vercel.app/api/nvd?pubStartDate=${isoStartDate}&pubEndDate=${isoEndDate}`;
             
             let monthlyCounts = {};
             let totalFetched = 0;
@@ -199,12 +199,12 @@
             try {
                 // Loop para buscar todos os resultados (a API é paginada)
                 while (true) {
-                    const response = await fetch(`${apiUrl}&startIndex=${startIndex}`, {
-                        headers: { 'apiKey': apiKey }
-                    });
+                    // A chamada agora é feita para a URL do proxy.
+                    // A chave de API (apiKey) NÃO é mais enviada daqui, pois o proxy a gerencia no servidor.
+                    const response = await fetch(`${proxyUrl}&startIndex=${startIndex}`);
 
                     if (!response.ok) {
-                        throw new Error(`Erro na API: ${response.statusText}`);
+                        throw new Error(`Erro na API do proxy: ${response.statusText}`);
                     }
 
                     const data = await response.json();
@@ -238,7 +238,7 @@
                 return { labels, counts };
 
             } catch (error) {
-                console.error("Falha ao buscar dados de vulnerabilidades:", error);
+                console.error("Falha ao buscar dados de vulnerabilidades via proxy:", error);
                 // Exibe uma mensagem de erro no lugar do gráfico
                 const chartContainer = document.querySelector('.chart-container');
                 chartContainer.innerHTML = '<p style="text-align:center; color: var(--text-medium);">Não foi possível carregar os dados das vulnerabilidades no momento.</p>';
@@ -246,7 +246,7 @@
             }
         }
 
-        // Função para criar o gráfico
+        // Função para criar o gráfico (nenhuma alteração necessária aqui)
         async function createChart() {
             const data = await fetchVulnerabilityData();
             if (!data) return;
@@ -293,6 +293,5 @@
         createChart();
     });
 </script>
-
 </body>
 </html>
