@@ -1,7 +1,15 @@
 {
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs22"
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/nvd.js",
+      "use": "@vercel/node"
     }
-  }
+  ],
+  "routes": [
+    {
+      "src": "/api/nvd",
+      "dest": "/api/nvd.js"
+    }
+  ]
 }
