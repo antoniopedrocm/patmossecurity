@@ -1,7 +1,14 @@
 {
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs22"
+  "version": 2,
+  "routes": [
+    {
+      "src": "/api/nvd",
+      "dest": "/api/nvd.js"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "https://patmossecurity.com.br/"
     }
-  }
+  ]
 }
+
