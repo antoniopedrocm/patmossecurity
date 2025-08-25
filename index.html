@@ -18,6 +18,77 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Estilos do Slideshow */
+        .slideshow-container {
+            position: relative;
+            margin: auto;
+            width: 100%; 
+        }
+        .slide {
+            display: none; 
+        }
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+        @keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+        }
+
+        /* Estilos para os SLIDES COM GRÁFICOS */
+        .chart-slide-content {
+            background-color: rgba(13, 17, 23, 0.8);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        .chart-slide-title {
+            text-align: center;
+            color: #EBF5FF;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .chart-slide-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+        }
+
+        /* Estilos para a SEÇÃO THREAT LANDSCAPE ESTÁTICA */
+        .threat-landscape-section {
+            padding: 80px 0;
+            background-color: #0d1117;
+            border-top: 1px solid #30363d;
+            border-bottom: 1px solid #30363d;
+        }
+        .threat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 40px;
+        }
+        .threat-stat { text-align: center; }
+        .threat-stat .stat-label { font-size: 1.1rem; color: #8b949e; }
+        .threat-stat .stat-number { font-family: 'Orbitron', sans-serif; font-size: 5rem; font-weight: 800; color: white; line-height: 1; margin: 10px 0; }
+        .threat-stat .stat-unit { font-size: 2rem; font-weight: 700; color: #435ADB; line-height: 1; }
+        .threat-stat .stat-caption { font-size: 0.9rem; color: #c9d1d9; margin-top: 10px; }
+        .threat-chart h3 { text-align: center; font-size: 1.2rem; color: #c9d1d9; margin-bottom: 20px; font-weight: 600; }
+        .threat-chart .chart-container { height: 300px; }
+
+        @media (max-width: 768px) {
+            .threat-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -62,8 +133,33 @@
                     </div>
                 </div>
                  <div class="hero-visual">
-                    <img src="hero.jpg" alt="Visual de Cibersegurança" />
-                </div>
+                    <div class="slideshow-container">
+                        <div class="slide fade">
+                            <div class="chart-slide-content">
+                                <h3 class="chart-slide-title">Crescimento Projetado do Custo do Cibercrime</h3>
+                                <div class="chart-slide-container">
+                                    <canvas id="costGrowthChartSlide"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide fade">
+                             <div class="chart-slide-content">
+                                <h3 class="chart-slide-title">Principais Vetores de Ataque</h3>
+                                <div class="chart-slide-container">
+                                    <canvas id="attackVectorsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide fade">
+                             <div class="chart-slide-content">
+                                <h3 class="chart-slide-title">Impacto nos Clientes (Antes x Depois)</h3>
+                                <div class="chart-slide-container">
+                                    <canvas id="clientImpactChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
             </div>
         </div>
     </section>
@@ -77,30 +173,46 @@
             </div>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    </div>
+                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
                     <h3>Pentest Especializado</h3>
                     <p>Simulamos ataques do mundo real para identificar e explorar vulnerabilidades em suas aplicações e infraestrutura antes que criminosos o façam.</p>
                     <a href="#contact" class="service-cta">Solicitar orçamento →</a>
                 </div>
-                
                 <div class="service-card">
-                    <div class="service-icon">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13.54v-3.54a4 4 0 1 0-8 0v3.54c0 .88-.34 1.72-.93 2.34l-1.62 1.62a2 2 0 1 1-2.82-2.82l1.62-1.62a4 4 0 0 0-5.66-5.66l-1.41 1.41a2 2 0 1 1-2.83-2.83l1.41-1.41a4 4 0 0 0 5.66 5.66l.3.3"></path><path d="m15 12-2 2"></path><path d="m17 10-2 2"></path></svg>
-                    </div>
+                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13.54v-3.54a4 4 0 1 0-8 0v3.54c0 .88-.34 1.72-.93 2.34l-1.62 1.62a2 2 0 1 1-2.82-2.82l1.62-1.62a4 4 0 0 0-5.66-5.66l-1.41 1.41a2 2 0 1 1-2.83-2.83l1.41-1.41a4 4 0 0 0 5.66 5.66l.3.3"></path><path d="m15 12-2 2"></path><path d="m17 10-2 2"></path></svg></div>
                     <h3>Análise de Vulnerabilidades</h3>
                     <p>Realizamos uma varredura profunda em seus sistemas para encontrar falhas de segurança, configurando a base para uma defesa proativa e eficaz.</p>
                     <a href="#contact" class="service-cta">Saber mais →</a>
                 </div>
-
                 <div class="service-card">
-                    <div class="service-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20z"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"></path><path d="M12 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path></svg>
-                    </div>
+                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20z"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"></path><path d="M12 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path></svg></div>
                     <h3>Consultoria Estratégica</h3>
                     <p>Alinhamos sua estratégia de negócio com as melhores práticas de cibersegurança, garantindo conformidade com LGPD, ISO 27001 e outros frameworks.</p>
                     <a href="#contact" class="service-cta">Agendar consulta →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="threat-landscape" class="threat-landscape-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Cenário Atual</div>
+                <h2>O Panorama de Ameaças em Evolução</h2>
+                <p>A escala e o custo do cibercrime estão acelerando a uma taxa sem precedentes.</p>
+            </div>
+            <div class="threat-grid">
+                <div class="threat-stat">
+                    <p class="stat-label">Custo Global Anual do Cibercrime</p>
+                    <p class="stat-number">$10.5</p>
+                    <p class="stat-unit">Trilhões</p>
+                    <p class="stat-caption">Projeção para 2025</p>
+                </div>
+                <div class="threat-chart">
+                    <h3>Crescimento Projetado dos Custos (USD)</h3>
+                    <div class="chart-container">
+                        <canvas id="staticCostGrowthChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -113,25 +225,19 @@
                 <h2>O Significado de Patmos Security</h2>
                 <p>Nosso nome reflete nossa abordagem: vigilância, clareza e a capacidade de revelar o que está oculto para proteger o que é mais valioso.</p>
             </div>
-            
             <div class="patmos-story-card">
                 <div class="patmos-story-content">
-                    <p>
-                        O nome <strong>Patmos</strong> vem da ilha grega onde o apóstolo João, em exílio, teve revelações que escreveu no livro do Apocalipse. Um lugar de isolamento e vigilância que se tornou símbolo de <strong>visão clara e proteção contra o invisível</strong>.
-                    </p>
-                    <p>
-                        Essa é a nossa essência: usar nossa visão técnica para revelar vulnerabilidades ocultas e fortalecer suas defesas.
-                    </p>
+                    <p>O nome <strong>Patmos</strong> vem da ilha grega onde o apóstolo João, em exílio, teve revelações que escreveu no livro do Apocalipse. Um lugar de isolamento e vigilância que se tornou símbolo de <strong>visão clara e proteção contra o invisível</strong>.</p>
+                    <p>Essa é a nossa essência: usar nossa visão técnica para revelar vulnerabilidades ocultas e fortalecer suas defesas.</p>
                 </div>
                 <div class="patmos-story-quote">
-                    <p><strong>Patmos Security</strong> é mais que um nome. É uma missão.<br>
-                    É sobre <em>enxergar antes</em> e <em>proteger sempre</em>.</p>
+                    <p><strong>Patmos Security</strong> é mais que um nome. É uma missão.<br>É sobre <em>enxergar antes</em> e <em>proteger sempre</em>.</p>
                 </div>
             </div>
         </div>
     </section>
 	
-		<section id="vulnerability-stats" class="vulnerability-stats">
+	<section id="vulnerability-stats" class="vulnerability-stats">
 		<div class="container">
 			<div class="section-header">
 				<div class="section-badge">Dados Globais</div>
@@ -164,135 +270,128 @@
 						<div class="logo-subtext">Cyber Security</div>
 					</div>
 				</a>
-				<p>Patmos Security © 2024 - Todos os direitos reservados.</p>
+				<p>Patmos Security © 2025 - Todos os direitos reservados.</p>
 			</div>
 		</div>
 	</footer>
 	
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const ctx = document.getElementById('cveChart');
-        if (!ctx) return;
-
-        // Função para buscar e processar os dados da NVD através do nosso proxy
-        async function fetchVulnerabilityData() {
-            const now = new Date();
-            const startDate = new Date();
-            startDate.setDate(now.getDate() - 180); // Últimos 180 dias
-
-            // Formata as datas para o padrão ISO, que o proxy vai repassar para a API da NVD
-            const isoStartDate = startDate.toISOString();
-            const isoEndDate = now.toISOString();
-
-            // --- ALTERAÇÃO PRINCIPAL ---
-            // A URL agora aponta para o seu proxy na Vercel.
-            // Se o seu domínio na Vercel for diferente, atualize a linha abaixo.
-            //const proxyUrl = `https://patmos-nvd-proxy.vercel.app/api/nvd?pubStartDate=${isoStartDate}&pubEndDate=${isoEndDate}`;
-			const proxyUrl = `/api/nvd?pubStartDate=${isoStartDate}&pubEndDate=${isoEndDate}`;
-            
-            let monthlyCounts = {};
-            let totalFetched = 0;
-            let startIndex = 0;
-            const resultsPerPage = 2000; // Máximo permitido pela API
-
-            try {
-                // Loop para buscar todos os resultados (a API é paginada)
-                while (true) {
-                    // A chamada agora é feita para a URL do proxy.
-                    // A chave de API (apiKey) NÃO é mais enviada daqui, pois o proxy a gerencia no servidor.
-                    const response = await fetch(`${proxyUrl}&startIndex=${startIndex}`);
-
-                    if (!response.ok) {
-                        throw new Error(`Erro na API do proxy: ${response.statusText}`);
-                    }
-
-                    const data = await response.json();
-                    const vulnerabilities = data.vulnerabilities || [];
-                    
-                    vulnerabilities.forEach(item => {
-                        const cveDate = new Date(item.cve.published);
-                        const monthYear = cveDate.toLocaleString('default', { month: 'short', year: 'numeric' });
-                        
-                        if (!monthlyCounts[monthYear]) {
-                            monthlyCounts[monthYear] = 0;
-                        }
-                        monthlyCounts[monthYear]++;
-                    });
-
-                    totalFetched += vulnerabilities.length;
-                    if (totalFetched >= data.totalResults || vulnerabilities.length === 0) {
-                        break; // Sai do loop se buscou tudo
-                    }
-                    startIndex += resultsPerPage;
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- LÓGICA PARA OS GRÁFICOS DO SLIDESHOW ---
+            const brilliantBlues = {
+                dark: '#00449E', bright: '#0160E7', medium: '#41A0FF', light: '#87C5FF',
+                bg: 'rgba(135, 197, 255, 0.2)', border: '#87C5FF', grid: 'rgba(135, 197, 255, 0.1)', text: '#EBF5FF'
+            };
+            const chartColors = [brilliantBlues.medium, brilliantBlues.bright, brilliantBlues.light, brilliantBlues.dark];
+            const defaultChartOptions = {
+                maintainAspectRatio: false, responsive: true,
+                plugins: { legend: { labels: { color: brilliantBlues.text, font: { family: "'Inter', sans-serif" }}}, tooltip: { bodyFont: { family: "'Inter', sans-serif" }, titleFont: { family: "'Inter', sans-serif" }}},
+                scales: {
+                    y: { ticks: { color: brilliantBlues.text, font: { family: "'Inter', sans-serif" }}, grid: { color: brilliantBlues.grid }},
+                    x: { ticks: { color: brilliantBlues.text, font: { family: "'Inter', sans-serif" }}, grid: { color: brilliantBlues.grid }}
                 }
+            };
 
-                // Ordena os meses cronologicamente para o gráfico
-                const sortedMonths = Object.keys(monthlyCounts).sort((a, b) => {
-                    return new Date(a) - new Date(b);
+            if (document.getElementById('costGrowthChartSlide')) {
+                new Chart(document.getElementById('costGrowthChartSlide'), {
+                    type: 'line',
+                    data: { labels: ['2022', '2023', '2024', '2025 (proj.)'], datasets: [{ label: 'Custo Global em Trilhões ($)', data: [7.0, 8.5, 9.7, 10.5], fill: true, backgroundColor: brilliantBlues.bg, borderColor: brilliantBlues.border, tension: 0.3, pointBackgroundColor: brilliantBlues.text, pointBorderColor: brilliantBlues.border }] },
+                    options: { ...defaultChartOptions }
                 });
-
-                const labels = sortedMonths;
-                const counts = sortedMonths.map(month => monthlyCounts[month]);
-
-                return { labels, counts };
-
-            } catch (error) {
-                console.error("Falha ao buscar dados de vulnerabilidades via proxy:", error);
-                // Exibe uma mensagem de erro no lugar do gráfico
-                const chartContainer = document.querySelector('.chart-container');
-                chartContainer.innerHTML = '<p style="text-align:center; color: var(--text-medium);">Não foi possível carregar os dados das vulnerabilidades no momento.</p>';
-                return null;
             }
-        }
+            if (document.getElementById('attackVectorsChart')) {
+                new Chart(document.getElementById('attackVectorsChart'), {
+                    type: 'doughnut',
+                    data: { labels: ['Phishing / Eng. Social', 'Ransomware', 'Malware', 'Ameaças Internas', 'Negação de Serviço'], datasets: [{ label: 'Vetores de Ataque', data: [36, 24, 18, 12, 10], backgroundColor: chartColors, borderColor: '#161b22', borderWidth: 4 }] },
+                    options: { ...defaultChartOptions, plugins: { ...defaultChartOptions.plugins, legend: { ...defaultChartOptions.plugins.legend, position: 'bottom' }}, scales: { y: { display: false }, x: { display: false } } }
+                });
+            }
+            if (document.getElementById('clientImpactChart')) {
+                new Chart(document.getElementById('clientImpactChart'), {
+                    type: 'radar',
+                    data: { labels: ['Detecção', 'Resposta', 'Resiliência', 'Integridade', 'Consciência'], datasets: [ { label: 'Antes da Patmos', data: [45, 30, 40, 55, 35], backgroundColor: 'rgba(255, 99, 132, 0.2)', borderColor: 'rgb(255, 99, 132)', pointBackgroundColor: 'rgb(255, 99, 132)'}, { label: 'Depois da Patmos', data: [92, 88, 95, 90, 85], backgroundColor: brilliantBlues.bg, borderColor: brilliantBlues.border, pointBackgroundColor: brilliantBlues.border }]},
+                    options: { ...defaultChartOptions, scales: { r: { angleLines: { color: brilliantBlues.grid }, grid: { color: brilliantBlues.grid }, pointLabels: { color: brilliantBlues.text, font: { family: "'Inter', sans-serif", size: 12 }}, ticks: { color: brilliantBlues.text, backdropColor: '#161b22'}}}}
+                });
+            }
 
-        // Função para criar o gráfico (nenhuma alteração necessária aqui)
-        async function createChart() {
-            const data = await fetchVulnerabilityData();
-            if (!data) return;
+            // --- LÓGICA PARA OS GRÁFICOS DAS SEÇÕES ESTÁTICAS ---
+            const staticChartOptions = {
+                responsive: true, maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, ticks: { color: '#8b949e' }, grid: { color: '#30363d' }}, x: { ticks: { color: '#8b949e' }, grid: { color: 'rgba(0,0,0,0)' }}},
+                plugins: { legend: { labels: { color: '#c9d1d9' }}}
+            };
 
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: data.labels,
-                    datasets: [{
-                        label: 'Novas Vulnerabilidades (CVEs)',
-                        data: data.counts,
-                        borderColor: '#435ADB', // Cor da linha (accent-primary)
-                        backgroundColor: 'rgba(67, 90, 219, 0.2)', // Cor da área sob a linha
-                        borderWidth: 2,
-                        tension: 0.4, // Suaviza a linha
-                        fill: true
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: { color: 'var(--text-medium)' },
-                            grid: { color: 'var(--border-color)' }
-                        },
-                        x: {
-                            ticks: { color: 'var(--text-medium)' },
-                            grid: { color: 'rgba(0,0,0,0)' }
+            if (document.getElementById('staticCostGrowthChart')) {
+                new Chart(document.getElementById('staticCostGrowthChart'), {
+                    type: 'bar',
+                    data: { labels: ['2022', '2023', '2024', '2025 (Proj.)'], datasets: [{ label: 'Custo do Cibercrime (em Trilhões de USD)', data: [7.0, 8.5, 9.7, 10.5], backgroundColor: 'rgba(67, 90, 219, 0.5)', borderColor: '#435ADB', borderWidth: 1 }] },
+                    options: { ...staticChartOptions, plugins: { legend: { display: false } }, scales: { ...staticChartOptions.scales, y: { ...staticChartOptions.scales.y, ticks: { callback: function(value) { return '$' + value + 'T'; }}} }}
+                });
+            }
+
+            const cveCtx = document.getElementById('cveChart');
+            if (cveCtx) {
+                async function fetchVulnerabilityData() {
+                    const now = new Date();
+                    const startDate = new Date();
+                    startDate.setDate(now.getDate() - 180); 
+                    const proxyUrl = `https://patmos-nvd-proxy.vercel.app/api/nvd?pubStartDate=${startDate.toISOString()}&pubEndDate=${now.toISOString()}`;
+                    let monthlyCounts = {};
+                    let startIndex = 0;
+                    try {
+                        while (true) {
+                            const response = await fetch(`${proxyUrl}&startIndex=${startIndex}`);
+                            if (!response.ok) throw new Error(`API Error: ${response.statusText}`);
+                            const data = await response.json();
+                            const vulnerabilities = data.vulnerabilities || [];
+                            vulnerabilities.forEach(item => {
+                                const cveDate = new Date(item.cve.published);
+                                const monthYear = cveDate.toLocaleString('default', { month: 'short', year: 'numeric' });
+                                monthlyCounts[monthYear] = (monthlyCounts[monthYear] || 0) + 1;
+                            });
+                            if ((startIndex + vulnerabilities.length) >= data.totalResults || vulnerabilities.length === 0) break;
+                            startIndex += 2000;
                         }
-                    },
-                    plugins: {
-                        legend: {
-                            labels: {
-                                color: 'var(--text-light)'
-                            }
-                        }
+                        const sortedMonths = Object.keys(monthlyCounts).sort((a, b) => new Date(a) - new Date(b));
+                        return { labels: sortedMonths, counts: sortedMonths.map(month => monthlyCounts[month]) };
+                    } catch (error) {
+                        console.error("Falha ao buscar dados de vulnerabilidades:", error);
+                        const chartContainer = document.querySelector('#vulnerability-stats .chart-container');
+                        if(chartContainer) chartContainer.innerHTML = '<p style="text-align:center; color: #8b949e;">Não foi possível carregar os dados das vulnerabilidades.</p>';
+                        return null;
                     }
                 }
-            });
-        }
+                async function createCveChart() {
+                    const data = await fetchVulnerabilityData();
+                    if (!data) return;
+                    new Chart(cveCtx, {
+                        type: 'line',
+                        data: { labels: data.labels, datasets: [{ label: 'Novas Vulnerabilidades (CVEs)', data: data.counts, borderColor: '#435ADB', backgroundColor: 'rgba(67, 90, 219, 0.2)', borderWidth: 2, tension: 0.4, fill: true }] },
+                        options: { ...staticChartOptions }
+                    });
+                }
+                createCveChart();
+            }
+        });
+    </script>
 
-        createChart();
-    });
-</script>
+    <script>
+        let slideIndex = 0;
+        showSlides();
+        function showSlides() {
+            let i;
+            const slides = document.querySelectorAll(".hero-visual .slide");
+            if (slides.length === 0) return;
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 6000); // 6 segundos por slide
+        }
+    </script>
 </body>
 </html>
