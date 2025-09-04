@@ -63,32 +63,6 @@
             width: 100%;
         }
 
-        /* Estilos para a SEÇÃO THREAT LANDSCAPE ESTÁTICA */
-        .threat-landscape-section {
-            padding: 80px 0;
-            background-color: #0d1117;
-            border-top: 1px solid #30363d;
-            border-bottom: 1px solid #30363d;
-        }
-        .threat-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 40px;
-            align-items: center;
-            margin-top: 40px;
-        }
-        .threat-stat { text-align: center; }
-        .threat-stat .stat-label { font-size: 1.1rem; color: #8b949e; }
-        .threat-stat .stat-number { font-family: 'Orbitron', sans-serif; font-size: 5rem; font-weight: 800; color: white; line-height: 1; margin: 10px 0; }
-        .threat-stat .stat-unit { font-size: 2rem; font-weight: 700; color: #435ADB; line-height: 1; }
-        .threat-stat .stat-caption { font-size: 0.9rem; color: #c9d1d9; margin-top: 10px; }
-        .threat-chart h3 { text-align: center; font-size: 1.2rem; color: #c9d1d9; margin-bottom: 20px; font-weight: 600; }
-        .threat-chart .chart-container { height: 300px; }
-
-        @media (max-width: 768px) {
-            .threat-grid { grid-template-columns: 1fr; }
-        }
-
         /* Código para reordenar o conteúdo em telas menores */
         @media (max-width: 992px) {
             .hero-content {
@@ -110,10 +84,145 @@
             }
         }
 
-        /* --- NOVO CÓDIGO PARA JUSTIFICAR TEXTO --- */
+        /* Código para justificar texto */
         .service-card p,
         .patmos-story-content p {
             text-align: justify;
+        }
+
+        /* --- ESTILOS DO NOVO DASHBOARD DE VULNERABILIDADES --- */
+        #vulnerability-dashboard {
+            padding: 100px 0;
+            background-color: var(--bg-dark);
+            border-top: 1px solid var(--border-color);
+        }
+        .dashboard-header { text-align: center; margin-bottom: 2.5rem; }
+        .dashboard-header h1 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        .date-range { font-size: 1.1rem; color: var(--text-medium); }
+        .refresh-btn {
+            display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+            max-width: 250px; margin: 0 auto 2.5rem auto; background-color: var(--accent-primary);
+            color: var(--text-light); border: none; padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius); cursor: pointer; font-size: 1rem; font-weight: 600;
+            transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .refresh-btn:hover { background-color: #2563EB; transform: translateY(-3px); box-shadow: 0 7px 14px rgba(67, 90, 219, 0.2); }
+        .refresh-btn:disabled { background-color: #6B7280; cursor: not-allowed; transform: none; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+        .stat-card {
+            background-color: var(--bg-medium); border-radius: var(--border-radius); padding: 1.5rem;
+            text-align: center; border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .stat-card:hover { transform: translateY(-5px); border-color: var(--accent-primary); }
+        .stat-number { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1; }
+        .stat-label { color: var(--text-medium); font-size: 0.9rem; font-weight: 500; }
+        .severity-critical { color: #8B5CF6; }
+        .severity-high { color: #EF4444; }
+        .severity-medium { color: #F97316; }
+        .severity-low { color: #F59E0B; }
+        
+        .chart-card { background-color: #1c2439; border-radius: var(--border-radius); padding: 1.5rem; border: 1px solid var(--border-color); }
+        .chart-title {
+            font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem;
+            text-align: center; color: var(--text-light);
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+        }
+        .chart-container-dash { position: relative; height: 350px; }
+        .loading { text-align: center; padding: 4rem; }
+        .spinner {
+            width: 56px; height: 56px; border-radius: 50%; border: 6px solid var(--border-color);
+            border-top-color: var(--accent-primary); animation: spin 1s linear infinite; margin: 0 auto 1.5rem auto;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { color: var(--text-medium); font-size: 1.1rem; }
+        .error {
+            text-align: center; padding: 2rem; background-color: var(--bg-medium);
+            border: 1px solid #EF4444; border-radius: var(--border-radius); margin: 1.5rem 0;
+        }
+        .error h3 { color: #EF4444; margin-bottom: 1rem; }
+        .error p { margin-top: 0.5rem; color: var(--text-medium); }
+        .success-indicator {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background-color: rgba(34, 197, 94, 0.1); color: #22C55E;
+            padding: 0.5rem 1rem; border-radius: 0.5rem; margin-top: 1rem;
+            font-size: 0.9rem; font-weight: 500;
+        }
+        .title-icon { width: 32px; height: 32px; }
+        .chart-icon { width: 24px; height: 24px; }
+        
+        .slider-container { position: relative; width: 100%; margin-bottom: 2.5rem; }
+        .slider-viewport { overflow: hidden; border-radius: var(--border-radius); }
+        .slider-track { display: flex; transition: transform 0.5s ease-in-out; }
+        .slider-item { width: 100%; flex-shrink: 0; }
+        
+        .slider-nav { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-top: 1.5rem; }
+        .slider-btn {
+            background-color: transparent; 
+            border: 1px solid var(--border-color);
+            color: var(--text-medium); 
+            width: 44px; 
+            height: 44px;
+            border-radius: 50%; 
+            font-size: 1.2rem;
+            cursor: pointer; 
+            transition: all 0.3s ease;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+        .slider-btn:hover { 
+            background-color: var(--accent-primary); 
+            border-color: var(--accent-primary);
+            color: var(--text-light);
+        }
+        .slider-btn:disabled { 
+            opacity: 0.4; 
+            cursor: not-allowed; 
+            background-color: transparent;
+            color: var(--text-medium);
+            border-color: var(--border-color);
+        }
+        .slider-dots { display: flex; gap: 0.75rem; align-items: center; }
+        .slider-dot {
+            width: 10px; 
+            height: 10px; 
+            border-radius: 50%;
+            background-color: var(--border-color); 
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .slider-dot.active { 
+            background-color: var(--accent-primary); 
+            transform: scale(1.25);
+        }
+
+        /* Estilos para os links de contato no rodapé */
+        .footer-contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .contact-link {
+            color: var(--text-medium);
+            transition: color 0.3s ease;
+        }
+        .contact-link:hover {
+            color: var(--text-light);
+        }
+        .contact-link svg {
+            width: 24px;
+            height: 24px;
         }
     </style>
 </head>
@@ -131,6 +240,7 @@
                 <ul class="nav-links">
                     <li><a href="#home">Início</a></li>
                     <li><a href="#services">Serviços</a></li>
+                    <li><a href="#vulnerability-dashboard">Dashboard</a></li>
                     <li><a href="#about">Sobre</a></li>
                     <li><a href="#contact">Contato</a></li>
                 </ul>
@@ -198,8 +308,8 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-badge">Nossas Soluções</div>
-                <h2>Um Arsenal Completo Para Sua Segurança</h2>
-                <p>Oferecemos um portfólio de serviços para blindar sua organização contra as ameaças digitais mais sofisticadas.</p>
+                <h2>Um Arsenal Completo Para Sua Segurança e Gestão</h2>
+                <p>Oferecemos um portfólio de serviços para blindar sua organização e otimizar seus processos de negócio.</p>
             </div>
             <div class="services-grid">
                 <div class="service-card">
@@ -215,33 +325,89 @@
                     <a href="#contact" class="service-cta">Saber mais →</a>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20z"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"></path><path d="M12 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path></svg></div>
-                    <h3>Consultoria Estratégica</h3>
-                    <p>Alinhamos sua estratégia de negócio com as melhores práticas de cibersegurança, garantindo conformidade com LGPD, ISO 27001 e outros frameworks.</p>
-                    <a href="#contact" class="service-cta">Agendar consulta →</a>
+                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
+                    <h3>Correção de Vulnerabilidades</h3>
+                    <p>Não basta apenas encontrar as falhas. Nossa equipe atua de forma proativa na aplicação de correções e patches de segurança, fortalecendo a infraestrutura do seu sistema para prevenir que vulnerabilidades conhecidas sejam exploradas por invasores.</p>
+                    <a href="#contact" class="service-cta">Fortalecer defesas →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg></div>
+                    <h3>Soluções CRM/ERP Personalizadas</h3>
+                    <p>Criamos e damos suporte a sistemas CRM e ERP sob medida para o seu negócio. Integre todas as suas operações, desde o relacionamento com o cliente (CRM) até a gestão de recursos (ERP), em uma plataforma robusta e centralizada para otimizar processos e impulsionar o crescimento.</p>
+                    <a href="#contact" class="service-cta">Analisar meu projeto →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+                    <h3>Monitoramento e Backup Contínuo</h3>
+                    <p>Proteção 24/7. Monitoramos seus sistemas em tempo real para detectar e responder a atividades suspeitas imediatamente. Além disso, garantimos a segurança dos seus dados com rotinas de backup robustas e automatizadas, prontas para restaurar suas operações em caso de desastres.</p>
+                    <a href="#contact" class="service-cta">Garantir continuidade →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="threat-landscape" class="threat-landscape-section">
+    <!-- SEÇÃO ANTIGA FOI REMOVIDA E SUBSTITUÍDA PELA NOVA ABAIXO -->
+    <section id="vulnerability-dashboard">
         <div class="container">
             <div class="section-header">
-                <div class="section-badge">Cenário Atual</div>
-                <h2>O Panorama de Ameaças em Evolução</h2>
-                <p>A escala e o custo do cibercrime estão acelerando a uma taxa sem precedentes.</p>
+                <div class="section-badge">Dados Globais</div>
+                <h2>Cenário de Ameaças em Tempo Real</h2>
+                <p>Novas vulnerabilidades (CVEs) publicadas globalmente nos últimos 30 dias, com dados fornecidos pela National Vulnerability Database (NVD).</p>
+                <div class="date-range" id="dateRange">Carregando período...</div>
             </div>
-            <div class="threat-grid">
-                <div class="threat-stat">
-                    <p class="stat-label">Custo Global Anual do Cibercrime</p>
-                    <p class="stat-number">$10.5</p>
-                    <p class="stat-unit">Trilhões</p>
-                    <p class="stat-caption">Projeção para 2025</p>
+
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <div class="loading-text">Buscando dados reais dos últimos 30 dias via API PatmosSecurity...</div>
+                <div style="margin-top: 10px; color: var(--text-secondary); opacity: 0.7;">Processando vulnerabilidades do NVD - isso pode levar alguns instantes.</div>
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="dashboard" style="display: none;">
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-number" id="totalVulns">0</div><div class="stat-label">Total de CVEs</div></div>
+                    <div class="stat-card"><div class="stat-number severity-critical" id="criticalCount">0</div><div class="stat-label">Críticas</div></div>
+                    <div class="stat-card"><div class="stat-number severity-high" id="highCount">0</div><div class="stat-label">Altas</div></div>
+                    <div class="stat-card"><div class="stat-number severity-medium" id="mediumCount">0</div><div class="stat-label">Médias</div></div>
+                    <div class="stat-card"><div class="stat-number severity-low" id="lowCount">0</div><div class="stat-label">Baixas</div></div>
+                    <div class="stat-card"><div class="stat-number" id="noneCount" style="color: #6B7280;">0</div><div class="stat-label">Não Classificadas</div></div>
+                    <div class="stat-card"><div class="stat-number" id="avgDaily" style="color: var(--text-light);">0</div><div class="stat-label">Média Diária</div></div>
                 </div>
-                <div class="threat-chart">
-                    <h3>Crescimento Projetado dos Custos (USD)</h3>
-                    <div class="chart-container">
-                        <canvas id="staticCostGrowthChart"></canvas>
+
+                <div class="slider-container">
+                    <div class="slider-viewport">
+                        <div class="slider-track" id="sliderTrack">
+                            <div class="slider-item">
+                                <div class="chart-card">
+                                    <div class="chart-title"><svg class="chart-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+                                        <span>Vulnerabilidades por Mês</span>
+                                    </div>
+                                    <div class="chart-container-dash"><canvas id="monthlyChart"></canvas></div>
+                                </div>
+                            </div>
+                            <div class="slider-item">
+                                <div class="chart-card">
+                                    <div class="chart-title"><svg class="chart-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 100 15 7.5 7.5 0 000-15zM21 21l-5.197-5.197" /></svg>
+                                        <span>Distribuição por Severidade</span>
+                                    </div>
+                                    <div class="chart-container-dash"><canvas id="severityChart"></canvas></div>
+                                </div>
+                            </div>
+                            <div class="slider-item">
+                                <div class="chart-card">
+                                    <div class="chart-title"><svg class="chart-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-3.75-2.25M21 18v-6c0-.621-.504-1.125-1.125-1.125H12.75" /></svg>
+                                        <span>Tendência Diária (Últimos 30 dias)</span>
+                                    </div>
+                                    <div class="chart-container-dash"><canvas id="dailyChart"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-nav">
+                        <button class="slider-btn" id="sliderPrevBtn" aria-label="Gráfico Anterior">&#x276E;</button>
+                        <div class="slider-dots" id="sliderDots"></div>
+                        <button class="slider-btn" id="sliderNextBtn" aria-label="Próximo Gráfico">&#x276F;</button>
                     </div>
                 </div>
             </div>
@@ -257,7 +423,7 @@
             </div>
             <div class="patmos-story-card">
                 <div class="patmos-story-content">
-                    <p>O nome <strong>Patmos</strong> vem da ilha grega onde o apóstolo João, em exílio, teve revelações que escreveu no livro do Apocalipse. Um lugar de isolamento e vigilância que se tornou símbolo de <strong>visão clara e proteção contra o invisível</strong>.</p>
+                    <p>O nome <strong>Patmos</strong> vem da ilha grega onde o aposto Apóstolo João, em exílio, teve revelações que escreveu no livro do Apocalipse. Um lugar de isolamento e vigilância que se tornou símbolo de <strong>visão clara e proteção contra o invisível</strong>.</p>
                     <p>Essa é a nossa essência: usar nossa visão técnica para revelar vulnerabilidades ocultas e fortalecer suas defesas.</p>
                 </div>
                 <div class="patmos-story-quote">
@@ -267,19 +433,6 @@
         </div>
     </section>
 	
-	<section id="vulnerability-stats" class="vulnerability-stats">
-		<div class="container">
-			<div class="section-header">
-				<div class="section-badge">Dados Globais</div>
-				<h2>Cenário de Ameaças em Tempo Real</h2>
-				<p>Novas vulnerabilidades (CVEs) publicadas globalmente nos últimos 6 meses, com dados fornecidos pela National Vulnerability Database (NVD).</p>
-			</div>
-			<div class="chart-container">
-				<canvas id="cveChart"></canvas>
-			</div>
-		</div>
-	</section>
-
     <section id="contact" class="cta-section">
         <div class="container">
             <div class="cta-content">
@@ -301,15 +454,27 @@
 					</div>
 				</a>
 				<p>Patmos Security © 2025 - Todos os direitos reservados.</p>
+                <div class="footer-contact-links">
+                    <a href="https://www.instagram.com/patmos_security/" target="_blank" class="contact-link" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="https://wa.me/5511998310847" target="_blank" class="contact-link" aria-label="WhatsApp">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                    </a>
+                    <a href="tel:+556232998997" class="contact-link" aria-label="Telefone">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    </a>
+                </div>
 			</div>
 		</div>
 	</footer>
 	
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.1.0"></script>
 
     <script>
+        // SCRIPT DO SLIDESHOW DO HERO
         document.addEventListener('DOMContentLoaded', function () {
-            // --- LÓGICA PARA OS GRÁFICOS DO SLIDESHOW ---
             const brilliantBlues = {
                 dark: '#00449E', bright: '#0160E7', medium: '#41A0FF', light: '#87C5FF',
                 bg: 'rgba(135, 197, 255, 0.2)', border: '#87C5FF', grid: 'rgba(135, 197, 255, 0.1)', text: '#EBF5FF'
@@ -345,69 +510,11 @@
                     options: { ...defaultChartOptions, scales: { r: { angleLines: { color: brilliantBlues.grid }, grid: { color: brilliantBlues.grid }, pointLabels: { color: brilliantBlues.text, font: { family: "'Inter', sans-serif", size: 12 }}, ticks: { color: brilliantBlues.text, backdropColor: '#161b22'}}}}
                 });
             }
-
-            // --- LÓGICA PARA OS GRÁFICOS DAS SEÇÕES ESTÁTICAS ---
-            const staticChartOptions = {
-                responsive: true, maintainAspectRatio: false,
-                scales: { y: { beginAtZero: true, ticks: { color: '#8b949e' }, grid: { color: '#30363d' }}, x: { ticks: { color: '#8b949e' }, grid: { color: 'rgba(0,0,0,0)' }}},
-                plugins: { legend: { labels: { color: '#c9d1d9' }}}
-            };
-
-            if (document.getElementById('staticCostGrowthChart')) {
-                new Chart(document.getElementById('staticCostGrowthChart'), {
-                    type: 'bar',
-                    data: { labels: ['2022', '2023', '2024', '2025 (Proj.)'], datasets: [{ label: 'Custo do Cibercrime (em Trilhões de USD)', data: [7.0, 8.5, 9.7, 10.5], backgroundColor: 'rgba(67, 90, 219, 0.5)', borderColor: '#435ADB', borderWidth: 1 }] },
-                    options: { ...staticChartOptions, plugins: { legend: { display: false } }, scales: { ...staticChartOptions.scales, y: { ...staticChartOptions.scales.y, ticks: { callback: function(value) { return '$' + value + 'T'; }}} }}
-                });
-            }
-
-            const cveCtx = document.getElementById('cveChart');
-            if (cveCtx) {
-                async function fetchVulnerabilityData() {
-                    const now = new Date();
-                    const startDate = new Date();
-                    startDate.setDate(now.getDate() - 180); 
-                    const proxyUrl = `https://patmos-nvd-proxy.vercel.app/api/nvd?pubStartDate=${startDate.toISOString()}&pubEndDate=${now.toISOString()}`;
-                    let monthlyCounts = {};
-                    let startIndex = 0;
-                    try {
-                        while (true) {
-                            const response = await fetch(`${proxyUrl}&startIndex=${startIndex}`);
-                            if (!response.ok) throw new Error(`API Error: ${response.statusText}`);
-                            const data = await response.json();
-                            const vulnerabilities = data.vulnerabilities || [];
-                            vulnerabilities.forEach(item => {
-                                const cveDate = new Date(item.cve.published);
-                                const monthYear = cveDate.toLocaleString('default', { month: 'short', year: 'numeric' });
-                                monthlyCounts[monthYear] = (monthlyCounts[monthYear] || 0) + 1;
-                            });
-                            if ((startIndex + vulnerabilities.length) >= data.totalResults || vulnerabilities.length === 0) break;
-                            startIndex += 2000;
-                        }
-                        const sortedMonths = Object.keys(monthlyCounts).sort((a, b) => new Date(a) - new Date(b));
-                        return { labels: sortedMonths, counts: sortedMonths.map(month => monthlyCounts[month]) };
-                    } catch (error) {
-                        console.error("Falha ao buscar dados de vulnerabilidades:", error);
-                        const chartContainer = document.querySelector('#vulnerability-stats .chart-container');
-                        if(chartContainer) chartContainer.innerHTML = '<p style="text-align:center; color: #8b949e;">Não foi possível carregar os dados das vulnerabilidades.</p>';
-                        return null;
-                    }
-                }
-                async function createCveChart() {
-                    const data = await fetchVulnerabilityData();
-                    if (!data) return;
-                    new Chart(cveCtx, {
-                        type: 'line',
-                        data: { labels: data.labels, datasets: [{ label: 'Novas Vulnerabilidades (CVEs)', data: data.counts, borderColor: '#435ADB', backgroundColor: 'rgba(67, 90, 219, 0.2)', borderWidth: 2, tension: 0.4, fill: true }] },
-                        options: { ...staticChartOptions }
-                    });
-                }
-                createCveChart();
-            }
         });
     </script>
 
     <script>
+        // SCRIPT DO SLIDESHOW DO HERO (CONTINUAÇÃO)
         let slideIndex = 0;
         showSlides();
         function showSlides() {
@@ -422,6 +529,225 @@
             slides[slideIndex - 1].style.display = "block";
             setTimeout(showSlides, 6000); // 6 segundos por slide
         }
+    </script>
+    
+    <script>
+        // --- SCRIPT DO NOVO DASHBOARD DE VULNERABILIDADES ---
+        let monthlyChart, severityChart, dailyChart;
+        Chart.defaults.color = '#FFFFFF'; // Fonte Branca
+        Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+        Chart.register(ChartDataLabels);
+
+        async function fetchVulnerabilityData() {
+            const now = new Date();
+            const startDate = new Date();
+            startDate.setDate(now.getDate() - 30);
+            const proxyUrl = `https://patmossecurity.vercel.app/api/nvd?pubStartDate=${startDate.toISOString()}&pubEndDate=${now.toISOString()}`;
+            try {
+                const response = await fetch(proxyUrl);
+                if (!response.ok) throw new Error(`Erro HTTP ${response.status}: ${await response.text()}`);
+                const data = await response.json();
+                if (!data.vulnerabilities || !Array.isArray(data.vulnerabilities)) throw new Error('Formato de dados inválido');
+                return { vulnerabilities: data.vulnerabilities, startDate: startDate, endDate: now };
+            } catch (error) { console.error('❌ Erro ao buscar dados:', error); throw error; }
+        }
+
+        function processVulnerabilityData(data) {
+            const { vulnerabilities } = data;
+            let monthlyCounts = {}, dailyCounts = {}, severityCounts = { 'CRITICAL': 0, 'HIGH': 0, 'MEDIUM': 0, 'LOW': 0, 'NONE': 0 };
+            vulnerabilities.forEach(vuln => {
+                try {
+                    const pubDate = new Date(vuln.cve.published);
+                    const monthKey = `${pubDate.getUTCFullYear()}-${String(pubDate.getUTCMonth() + 1).padStart(2, '0')}`;
+                    const dayKey = pubDate.toISOString().split('T')[0];
+                    monthlyCounts[monthKey] = (monthlyCounts[monthKey] || 0) + 1;
+                    dailyCounts[dayKey] = (dailyCounts[dayKey] || 0) + 1;
+                    let severity = 'NONE';
+                    if (vuln.cve.metrics.cvssMetricV31) severity = vuln.cve.metrics.cvssMetricV31[0].cvssData.baseSeverity;
+                    else if (vuln.cve.metrics.cvssMetricV30) severity = vuln.cve.metrics.cvssMetricV30[0].cvssData.baseSeverity;
+                    else if (vuln.cve.metrics.cvssMetricV2) {
+                        const score = vuln.cve.metrics.cvssMetricV2[0].cvssData.baseScore;
+                        if (score >= 9.0) severity = 'CRITICAL'; else if (score >= 7.0) severity = 'HIGH';
+                        else if (score >= 4.0) severity = 'MEDIUM'; else severity = 'LOW';
+                    }
+                    severityCounts[severity] = (severityCounts[severity] || 0) + 1;
+                } catch { severityCounts['NONE']++; }
+            });
+            return { total: vulnerabilities.length, monthlyCounts, dailyCounts, severityCounts, avgDaily: Math.round(vulnerabilities.length / 30) };
+        }
+
+        function updateStatistics(processedData) {
+            document.getElementById('totalVulns').textContent = processedData.total.toLocaleString('pt-BR');
+            document.getElementById('criticalCount').textContent = processedData.severityCounts.CRITICAL.toLocaleString('pt-BR');
+            document.getElementById('highCount').textContent = processedData.severityCounts.HIGH.toLocaleString('pt-BR');
+            document.getElementById('mediumCount').textContent = processedData.severityCounts.MEDIUM.toLocaleString('pt-BR');
+            document.getElementById('lowCount').textContent = processedData.severityCounts.LOW.toLocaleString('pt-BR');
+            document.getElementById('noneCount').textContent = processedData.severityCounts.NONE.toLocaleString('pt-BR');
+            document.getElementById('avgDaily').textContent = processedData.avgDaily.toLocaleString('pt-BR');
+        }
+        
+        function createMonthlyChart(monthlyCounts, startDate, endDate) {
+            const ctx = document.getElementById('monthlyChart').getContext('2d');
+            if (monthlyChart) monthlyChart.destroy();
+            const sortedMonths = Object.keys(monthlyCounts).sort();
+            const finalLabels = sortedMonths.map(monthKey => {
+                const [year, monthNum] = monthKey.split('-').map(Number);
+                const monthIndex = monthNum - 1;
+                let dayStart = 1;
+                if (startDate.getFullYear() === year && startDate.getMonth() === monthIndex) dayStart = startDate.getDate();
+                let dayEnd;
+                const lastDayOfMonth = new Date(year, monthNum, 0).getDate();
+                if (endDate.getFullYear() === year && endDate.getMonth() === monthIndex) dayEnd = endDate.getDate();
+                else dayEnd = lastDayOfMonth;
+                const dateForFormatter = new Date(year, monthIndex, 1);
+                if (dayStart === 1 && dayEnd === lastDayOfMonth) return dateForFormatter.toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' });
+                const monthName = dateForFormatter.toLocaleDateString('pt-BR', { month: 'short' }).replace('.', '');
+                return `${String(dayStart).padStart(2, '0')} ${monthName}. a ${dayEnd} de ${year}`;
+            });
+            const chartData = sortedMonths.map(key => monthlyCounts[key] || 0);
+            monthlyChart = new Chart(ctx, { type: 'bar', data: { labels: finalLabels, datasets: [{ label: 'Vulnerabilidades', data: chartData, backgroundColor: '#3B82F6', borderColor: '#3B82F6', borderWidth: 1, borderRadius: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: false } }, scales: { y: { beginAtZero: true, grid: { color: 'rgba(255, 255, 255, 0.1)' } }, x: { grid: { display: false } } } } });
+        }
+
+        function createSeverityChart(severityCounts) {
+            const ctx = document.getElementById('severityChart').getContext('2d');
+            if (severityChart) severityChart.destroy();
+            const colors = { 'CRITICAL': '#8B5CF6', 'HIGH': '#EF4444', 'MEDIUM': '#F97316', 'LOW': '#F59E0B', 'NONE': '#6B7280' };
+            const labels = Object.keys(severityCounts).filter(key => severityCounts[key] > 0);
+            const data = labels.map(key => severityCounts[key]);
+            const backgroundColors = labels.map(key => colors[key]);
+            const translations = { 'CRITICAL': 'Crítica', 'HIGH': 'Alta', 'MEDIUM': 'Média', 'LOW': 'Baixa', 'NONE': 'N/A' };
+            severityChart = new Chart(ctx, { 
+                type: 'doughnut', 
+                data: { 
+                    labels: labels.map(label => translations[label] || label), 
+                    datasets: [{ 
+                        data: data, 
+                        backgroundColor: backgroundColors, 
+                        borderColor: '#1c2439', 
+                        borderWidth: 4 
+                    }] 
+                }, 
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    cutout: '60%',
+                    plugins: { 
+                        legend: { 
+                            position: 'bottom', 
+                            labels: { 
+                                padding: 20, 
+                                usePointStyle: true, 
+                                pointStyle: 'rect' 
+                            } 
+                        }, 
+                        datalabels: { 
+                           display: false
+                        } 
+                    } 
+                } 
+            });
+        }
+
+        function createDailyChart(dailyCounts) {
+            const ctx = document.getElementById('dailyChart').getContext('2d');
+            if (dailyChart) dailyChart.destroy();
+            const now = new Date(), thirtyDaysAgo = new Date();
+            thirtyDaysAgo.setDate(now.getDate() - 30);
+            let last30Days = [];
+            for (let d = new Date(thirtyDaysAgo); d <= now; d.setDate(d.getDate() + 1)) {
+                last30Days.push({ date: d.toISOString().split('T')[0], count: dailyCounts[d.toISOString().split('T')[0]] || 0 });
+            }
+            const labels = last30Days.map(day => new Date(day.date).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', timeZone: 'UTC' }));
+            dailyChart = new Chart(ctx, { type: 'line', data: { labels: labels, datasets: [{ label: 'Vulnerabilidades por dia', data: last30Days.map(day => day.count), borderColor: '#EF4444', backgroundColor: 'rgba(239, 68, 68, 0.1)', borderWidth: 2, fill: true, tension: 0.4, pointBackgroundColor: '#FFFFFF', pointBorderColor: '#EF4444', pointHoverRadius: 7, pointRadius: 4, pointBorderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: {display: false} }, scales: { y: { beginAtZero: true, grid: { color: 'rgba(255, 255, 255, 0.1)' } }, x: { grid: { display: false } } } } });
+        }
+
+        let sliderIndexDash = 0;
+        let sliderTrack, sliderItems, sliderDots = [];
+
+        function setupSlider() {
+            sliderTrack = document.getElementById('sliderTrack');
+            sliderItems = document.querySelectorAll('.slider-item');
+            const dotsContainer = document.getElementById('sliderDots');
+            const prevBtn = document.getElementById('sliderPrevBtn');
+            const nextBtn = document.getElementById('sliderNextBtn');
+            dotsContainer.innerHTML = '';
+            sliderDots = [];
+
+            sliderItems.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.classList.add('slider-dot');
+                dot.setAttribute('aria-label', `Ir para o gráfico ${index + 1}`);
+                dot.addEventListener('click', () => {
+                    sliderIndexDash = index;
+                    updateSlider();
+                });
+                dotsContainer.appendChild(dot);
+                sliderDots.push(dot);
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (sliderIndexDash > 0) {
+                    sliderIndexDash--;
+                    updateSlider();
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (sliderIndexDash < sliderItems.length - 1) {
+                    sliderIndexDash++;
+                    updateSlider();
+                }
+            });
+            updateSlider();
+        }
+
+        function updateSlider() {
+            if (!sliderTrack || !sliderDots.length) return;
+            sliderTrack.style.transform = `translateX(-${sliderIndexDash * 100}%)`;
+            sliderDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === sliderIndexDash);
+            });
+            document.getElementById('sliderPrevBtn').disabled = sliderIndexDash === 0;
+            document.getElementById('sliderNextBtn').disabled = sliderIndexDash === sliderItems.length - 1;
+        }
+
+        async function loadData() {
+            const loading = document.getElementById('loading');
+            const errorEl = document.getElementById('error');
+            const dashboard = document.getElementById('dashboard');
+            const refreshBtn = document.getElementById('refreshBtn');
+            
+            loading.style.display = 'block';
+            errorEl.style.display = 'none';
+            dashboard.style.display = 'none';
+            if(refreshBtn) refreshBtn.disabled = true;
+            
+            try {
+                const data = await fetchVulnerabilityData();
+                const processedData = processVulnerabilityData(data);
+                const dateRange = `Período: ${data.startDate.toLocaleDateString('pt-BR')} - ${data.endDate.toLocaleDateString('pt-BR')}`;
+                document.getElementById('dateRange').textContent = dateRange;
+                
+                updateStatistics(processedData);
+                createMonthlyChart(processedData.monthlyCounts, data.startDate, data.endDate);
+                createSeverityChart(processedData.severityCounts);
+                createDailyChart(processedData.dailyCounts);
+                
+                dashboard.style.display = 'block';
+                setupSlider();
+
+            } catch (error) {
+                errorEl.style.display = 'block';
+                errorEl.innerHTML = `<h3>⚠️ Erro ao carregar dados</h3><p>${error.message}</p><p>Não foi possível obter as informações em tempo real fornecidas pela National Vulnerability Database (NVD). A API ou a base de dados pode estar temporariamente indisponível.</p><p>Tente novamente mais tarde.</p>`;
+            } finally {
+                loading.style.display = 'none';
+                if(refreshBtn) refreshBtn.disabled = false;
+            }
+        }
+        
+        const refreshBtn = document.getElementById('refreshBtn');
+        if(refreshBtn) refreshBtn.addEventListener('click', loadData);
+        window.addEventListener('load', loadData);
     </script>
 </body>
 </html>
